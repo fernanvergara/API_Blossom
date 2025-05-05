@@ -1,0 +1,121 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Blossom - Personajes de Rick y Morty",
+      "version": "1.0.0",
+      "description": "API para buscar personajes de Rick y Morty con filtros."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:1981/graphql",
+        "description": "Servidor de desarrollo GraphQL"
+      }
+    ],
+"paths": {
+    "/graphql": {
+      "post": {
+        "summary": "Consultar personajes (GraphQL)",
+        "description": "Endpoint para enviar consultas GraphQL para obtener información de personajes de Rick y Morty. Permite filtros por nombre, estado, especie, género y nombre del origen.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "example": "query { personajes(nombre: \"Rick\", status: \"Alive\") { id nombre status } }"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "nullable": true,
+                    "example": { "nombre": "Rick", "status": "Alive" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa de la consulta GraphQL. La estructura de la respuesta dependerá de la consulta enviada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "personajes": {
+                    "summary": "Ejemplo de respuesta para obtener personajes filtrados.",
+                    "value": {
+                      "data": {
+                        "personajes": [
+                          { "id": 1, "nombre": "Rick Sanchez", "status": "Alive" },
+                          { "id": 21, "nombre": "Morty Smith", "status": "Alive" }
+                        ]
+                      }
+                    }
+                  },
+                  "error": {
+                    "summary": "Ejemplo de respuesta con errores.",
+                    "value": {
+                      "errors": [
+                        { "message": "Mensaje de error" }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+      "schemas": {
+        "Personaje": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "nombre": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "especie": {
+              "type": "string"
+            },
+            "genero": {
+              "type": "string"
+            },
+            "origen": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "imagen": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "creado": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    }
+  }

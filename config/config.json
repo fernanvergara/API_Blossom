@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "xxxxx",
+    "database": "api_blossom_dev",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "xxxxx",
+    "database": "api_blossom_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "xxxxx",
+    "database": "api_blossom_prod",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
